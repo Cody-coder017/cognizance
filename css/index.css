@@ -16,10 +16,21 @@
 	border-radius: 5px;
 	background-color: #fff;
 	padding-bottom: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 1px solid #5616b5;
+	box-shadow: 0 0 20px rgba(111, 29, 234, 0.3) inset;
 }
 
 .index .links > div a {
 	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+	display: block;
+}
+
+.index .links > div a:hover span {
+	text-decoration: underline;
 }
 
 .index .links > div h2 {
@@ -45,6 +56,7 @@
 
 	body.index .links > div h2 {
 		font-size: 16px;
+		font-size: 2.9vw;
 	}
 }
 
@@ -56,6 +68,7 @@
 
 	body.index .links > div {
 		width: auto;
+		margin-bottom: 20px;
 	}
 	
 	body.index .links > div h2 {
