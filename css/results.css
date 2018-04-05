@@ -1,0 +1,40 @@
+.results .content {
+	max-width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #fff;
+	min-height: 200px;
+	border-radius: 6px;
+	padding: 10px 0 10px 0;
+}
+
+.results .content h1 {
+	margin-top: 5px;
+	padding-top: 15px;
+	color: #000;
+	text-align: center;
+}
+
+.results .rating-name {
+	background-color: #fa0;
+	color: #fff;
+	font-size: 5vmin;
+	padding: 3vmin 5vmin;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.results .rating-number {
+	font-size: 9vmin;
+	color: #559;
+	text-align: center;
+}
+
+.results .rating-description {
+	text-align: center;
+	color: #000;
+	font-size: 18px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
