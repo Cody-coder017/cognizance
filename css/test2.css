@@ -15,3 +15,37 @@
 	stroke-width: 2px;
 	stroke: #f00;
 }
+
+.test2 .game-over {
+	display: none;
+}
+
+.test2.game-over svg {
+	display: none;
+}
+
+.test2.game-over .game-over {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 400px;
+}
+
+.test2.game-over #number-of-shapes {
+	width: 100%;
+	font-size: 2em;
+}
+
+.test2.game-over .game-over h1 {
+	margin-top: 0;
+	padding-top: 20px;
+	text-align: center;
+}
+
+.test2.game-over .game-over p {
+	text-align: center;
+}
+
+.test2 .main-navigation-button[disabled] {
+	background-color: #ddd;
+}

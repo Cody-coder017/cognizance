@@ -1,11 +1,12 @@
 $(document).ready(function() {
-	
+	var timer;
 	var draw = SVG('svg-display').size('100%', '100%');
 	var circleDiameter = getAveragePixelDimension() * 0.1;
 	var circle = draw.circle(circleDiameter, circleDiameter).fill('#fff');
 	var d = [getMaxX() / 2, getMaxY() / 2];
 	var v = [0, 0];
 	var randomShapeQueue = [];
+	var randomShapeCount = 0;
 	var maxRandomShapes = 5;
 	var ballVelocityVariation = getAveragePixelDimension() * 0.002;
 	
@@ -48,12 +49,16 @@ $(document).ready(function() {
 		if (!processBoundaryCollision()) {
 			circle.x(d[0]);
 			circle.y(d[1]);
-			console.log(JSON.stringify(d));
 		}
 	}
 	
 	function getRandomColour() {
-		return '#' + Math.random().toString(16).substring(2, 5);
+		var result = '';
+		var digits = '89abcdef';
+		for (var i = 0; i < 3; i++) {
+			result += digits.charAt(Math.floor(Math.random() * digits.length));
+		}
+		return '#' + result;
 	}
 
 	function addRandomShape() {
@@ -75,6 +80,7 @@ $(document).ready(function() {
 		newShape.move(x, y);
 		randomShapeQueue.push(newShape);
 		newShape.animate().fill(getRandomColour());
+		randomShapeCount++;
 	}
 
 	function moveBox() {
@@ -87,5 +93,29 @@ $(document).ready(function() {
 		}
 	}
 
-	window.setInterval(moveBox, 20);
+	function endGame() {
+		draw.remove();
+		window.clearInterval(timer);
+		$('.content').remove();
+		$('body').addClass('game-over');
+	}
+	
+	function seeResults() {
+		location.href = 'results.php';
+	}
+	
+	function updateNavigateDisabled() {
+		var val = $('input[type="number"]').val();
+		if (!isNaN(val) && val && parseInt(val) > 0) {
+			$('.main-navigation-button').removeAttr('disabled');
+		}
+		else {
+			$('.main-navigation-button').attr('disabled', true);
+		}
+	}
+
+	$('input').change(updateNavigateDisabled);
+	$('.main-navigation-button').attr('type', 'button').click(seeResults);
+	timer = window.setInterval(moveBox, 20);
+	setTimeout(endGame, 20 * 1000);
 });
