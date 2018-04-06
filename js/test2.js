@@ -1,4 +1,69 @@
 $(document).ready(function() {
+	
+	function Square(colour, size, x, y) {
+		var self = this;
+
+		Shape.apply(self, [colour, size, x, y]);
+		
+		self.draw = function() {
+			var newShape = draw.rect(size, size);
+			newShape.move(x, y);
+			newShape.animate().fill(colour);
+			return newShape;
+		};
+		
+		self.getEventType = function() {
+			return 'shape/square';
+		};
+	}
+	
+	function Circle(colour, size, x, y) {
+		var self = this;
+
+		Shape.apply(self, [colour, size, x, y]);
+		
+		self.draw = function() {
+			var newShape = draw.circle(size, size);
+			newShape.move(x, y);
+			newShape.animate().fill(colour);
+			return newShape;
+		};
+
+		self.getEventType = function() {
+			return 'shape/circle';
+		};
+	}
+
+	function Shape(colour, x, y, size) {
+		var self = this;
+		self.getDrawEventData = function() {
+			return {
+				'type': 'shape/square',
+				'action_name': 'draw',
+				'when': new Date().getTime(),
+				'parameters': {
+					'colour': colour,
+					'size': size,
+					'x': x,
+					'y': y
+				}
+			};
+		};
+	}
+	
+	function createRandomShape() {
+		var size = getAveragePixelDimension() * 0.05 * (1 + Math.random());
+		var x = Math.random() * (getMaxX() - size);
+		var y = Math.random() * (getMaxY() - size);
+		var colour = getRandomColour();
+		if (Math.random() < 0.5) {
+			return new Circle(colour, size, x, y);
+		}
+		else {
+			return new Square(colour, size, x, y);
+		}
+	}
+	
 	var timer;
 	var draw = SVG('svg-display').size('100%', '100%');
 	var circleDiameter = getAveragePixelDimension() * 0.1;
@@ -9,6 +74,7 @@ $(document).ready(function() {
 	var randomShapeCount = 0;
 	var maxRandomShapes = 5;
 	var ballVelocityVariation = getAveragePixelDimension() * 0.002;
+	var gamePlayEvents = [];
 	
 	function randomizeVelocity() {
 		v[0] += (Math.random() - 0.5) * ballVelocityVariation;
@@ -62,24 +128,14 @@ $(document).ready(function() {
 	}
 
 	function addRandomShape() {
-		var size = getAveragePixelDimension() * 0.05 * (1 + Math.random());
-		var x = Math.random() * (getMaxX() - size);
-		var y = Math.random() * (getMaxY() - size);
+		var newShape = createRandomShape();
 
 		if (randomShapeQueue.length > maxRandomShapes) {
 			randomShapeQueue[0].remove();
 			randomShapeQueue.shift(); // remove the first from the queue.
 		}
-		var newShape;
-		if (Math.random() < 0.5)
-			newShape = draw.rect(size, size);
-		else {
-			newShape = draw.circle(size, size);
-		}
-		
-		newShape.move(x, y);
-		randomShapeQueue.push(newShape);
-		newShape.animate().fill(getRandomColour());
+		randomShapeQueue.push(newShape.draw());
+		gamePlayEvents.push(newShape.getDrawEventData());
 		randomShapeCount++;
 	}
 
@@ -100,8 +156,20 @@ $(document).ready(function() {
 		$('body').addClass('game-over');
 	}
 	
+	function submitResults() {
+		var data = {
+			'events': gamePlayEvents,
+			'guessed_number': $('input').val()
+		};
+		// FIXME: change this to run $.ajax and POST eventsData to server.
+		var deferred = $.Deferred().resolve();
+		return deferred.promise();
+	}
+	
 	function seeResults() {
-		location.href = 'results.php';
+		submitResults().then(function() {
+			location.href = 'results.php';
+		});
 	}
 	
 	function updateNavigateDisabled() {
@@ -114,7 +182,7 @@ $(document).ready(function() {
 		}
 	}
 
-	$('input').change(updateNavigateDisabled);
+	$('input').bind('change keypress', updateNavigateDisabled);
 	$('.main-navigation-button').attr('type', 'button').click(seeResults);
 	timer = window.setInterval(moveBox, 20);
 	setTimeout(endGame, 20 * 1000);
