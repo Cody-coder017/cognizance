@@ -4,7 +4,7 @@
 
 .index .links {
 	display: flex;
-	width: 600px;
+	width: 750px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -12,7 +12,7 @@
 .index .links > div {
 	flex-grow: 1;
 	flex-shrink: 1;
-	width: 50%;
+	width: 33%;
 	border-radius: 5px;
 	background-color: #fff;
 	padding-bottom: 30px;
@@ -45,6 +45,23 @@
 	}
 }
 
+@media screen and (min-width: 600px) and (max-width: 750px) {
+	body.index .links {
+		display: block;
+		width: 100%;
+	}
+
+	body.index .links > div {
+		display: inline-block;
+		height: 80px;
+		width: 37vw;
+	}
+
+	body.index .links > div:last-of-type {
+		margin-top: 20px;
+	}
+}
+
 @media screen and (min-width: 450px) and (max-width: 600px) {
 	body.index .links {
 		width: 100%;
@@ -56,7 +73,7 @@
 
 	body.index .links > div h2 {
 		font-size: 16px;
-		font-size: 2.9vw;
+		font-size: 2.0vw;
 	}
 }
 

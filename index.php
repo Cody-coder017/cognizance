@@ -6,15 +6,22 @@ printHeader('index');
 	<div class="links">
 		<div>
 			<a href="welcome.php">
-			<h2>New here?</h2>
-			<span>Get Started.</span>
+				<h2>New here?</h2>
+				<span>Get Started.</span>
 			</a>
 		</div>
-		
+
 		<div>
 			<a href="signin.php">
-			<h2>Already have an account?</h2>
-			<span>Sign in.</span>
+				<h2>Already have an account?</h2>
+				<span>Sign in.</span>
+			</a>
+		</div>
+
+		<div>
+			<a href="downloads/app-release.apk">
+				<h2>Download Android</h2>
+				<span>Install Android App</span>
 			</a>
 		</div>
 	</div>
