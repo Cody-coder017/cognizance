@@ -1,7 +1,9 @@
 <?php
 require_once('includes/header_footers.php');
 printHeader('index');
-?>	<h1>Cognizance</h1>
+?>
+	<div class="logo"></div>
+	<h1>Cognizance</h1>
 	<p>Rate your cognitive performance</p>
 	<div class="links">
 		<div>

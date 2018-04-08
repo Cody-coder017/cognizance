@@ -1,5 +1,24 @@
 .index {
 	text-align: center;
+	margin: 0;
+	padding-top: 20px;
+}
+
+.index .logo {
+	background-image: url('../images/logo.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center center;
+	width: 200px;
+	height: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 100px;
+	box-shadow: 0 0 50px #000;
+}
+
+.index .links p span {
+	color: #000;
 }
 
 .index .links {
@@ -38,6 +57,30 @@
 	color: #000;
 }
 
+@media screen and (min-height: 870px) and (min-width: 751px) {
+	body.index .logo {
+		width: 600px;
+		height: 600px;
+		border-radius: 300px;
+	}
+}
+
+@media screen and (min-height: 680px) and (max-height: 870px) and (min-width: 751px) {
+	body.index .logo {
+		width: 400px;
+		height: 400px;
+		border-radius: 200px;
+	}
+}
+
+@media screen and (min-height: 600px) and (max-height: 680px) and (min-width: 751px) {
+	body.index .logo {
+		width: 300px;
+		height: 300px;
+		border-radius: 150px;
+	}
+}
+
 @media screen and (min-width: 450px) {
 	body.index .links > div {
 		margin-left: 12px;
@@ -53,8 +96,12 @@
 
 	body.index .links > div {
 		display: inline-block;
-		height: 80px;
+		height: 90px;
 		width: 37vw;
+	}
+
+	body.index .links > div h2 {
+		font-size: 16px;
 	}
 
 	body.index .links > div:last-of-type {
@@ -62,9 +109,18 @@
 	}
 }
 
-@media screen and (min-width: 450px) and (max-width: 600px) {
+@media screen and (min-width: 451px) and (max-width: 600px) {
 	body.index .links {
+		display: block;
 		width: 100%;
+	}
+
+	body.index .links > div {
+		display: inline-block;
+		height: 70px;
+		width: 37vw;
+		margin-left: 5px;
+		margin-right: 5px;
 	}
 
 	body.index .links > div a {
@@ -72,8 +128,13 @@
 	}
 
 	body.index .links > div h2 {
+		margin-bottom: 25px;
 		font-size: 16px;
-		font-size: 2.0vw;
+		font-size: 2.4vw;
+	}
+
+	body.index .links > div:last-of-type {
+		margin-top: 20px;
 	}
 }
 
@@ -87,8 +148,39 @@
 		width: auto;
 		margin-bottom: 20px;
 	}
-	
+
 	body.index .links > div h2 {
-		padding-top: 10px;
+		padding-top: 6px;
+	}
+}
+
+@media screen and (max-width: 450px) and (max-height: 710px) {
+	body.index {
+		padding-top: 15px;
+	}
+
+	body.index .logo {
+		width: 100px;
+		height: 100px;
+		border-radius: 50px;
+		box-shadow: 0 0 25px #000;
+	}
+
+	body.index > h1 {
+		margin-top: 16px;
+		margin-bottom: 8px;
+	}
+
+	body.index > p {
+		margin-top: 10px;
+	}
+
+	html body.index .links > div {
+		margin-bottom: 12px;
+		height: 53px;
+	}
+
+	body.index .links > div h2 {
+		padding-top: 2px;
 	}
 }
