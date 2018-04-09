@@ -11,11 +11,12 @@ function printHeader($page_class_name, $scripts = [])
 		<!--[if IE]><link rel="shortcut icon" href="images/favicon.ico"><![endif]-->
 		<link rel="icon" href="images/favicon.png">
 		<meta name="author" content="Josh Greig">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, user-scalable=no">
 		<script src="js/jquery-3.3.1.min.js"></script>
 		<?php foreach ($scripts as $script): ?>
 		<script src="<?php echo $script; ?>"></script>
 		<?php endforeach; ?>
+		 <link rel="manifest" href="manifest.json" />
 	</head>
 	<body <?php 
 		if (isset($page_class_name)) {

@@ -1,0 +1,21 @@
+{
+  "dir": "ltr",
+  "lang": "en",
+  "name": "Cognizance",
+  "display": "fullscreen",
+  "start_url": "/",
+  "short_name": "Cognizance",
+  "theme_color": "#6f1dea",
+  "description": "",
+  "orientation": "portrait",
+  "background_color": "#6f1dea",
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "icons": [
+      {
+          "src": "/images/logo192x192.png",
+          "type": "image/png",
+          "sizes": "192x192"
+      }
+  ]
+}
