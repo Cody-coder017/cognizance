@@ -1,7 +1,22 @@
 <?php
 
-function printHeader($page_class_name, $scripts = [])
+session_start();
+
+function isPWA()
 {
+	if ((isset($_GET['using_pwa']) && $_GET['using_pwa']) || (isset($_SESSION['using_pwa']) && $_SESSION['using_pwa'])) {
+		$_SESSION['using_pwa'] = true;
+		return true;
+	}
+	return false;
+}
+
+function printHeader($page_class_name, $scripts = [], $allow_scale = true)
+{
+	if (isPWA()) {
+		$allow_scale = false;
+	}
+
 	?><!doctype html>
 <html lang="en">
 	<head>
@@ -11,7 +26,11 @@ function printHeader($page_class_name, $scripts = [])
 		<!--[if IE]><link rel="shortcut icon" href="images/favicon.ico"><![endif]-->
 		<link rel="icon" href="images/favicon.png">
 		<meta name="author" content="Josh Greig">
+		<?php if ($allow_scale): ?>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<?php else: ?>
 		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<?php endif; ?>
 		<script src="js/jquery-3.3.1.min.js"></script>
 		<?php foreach ($scripts as $script): ?>
 		<script src="<?php echo $script; ?>"></script>
