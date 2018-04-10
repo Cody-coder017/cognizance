@@ -1,7 +1,7 @@
 <?php
 require_once('includes/header_footers.php');
 
-printHeader('test2 test', ['js/svg.js', 'js/test2.js']);
+printHeader('test2 test', ['js/svg.js', 'js/test2.js'], false);
 ?>
 <div class="content" id="svg-display">
 </div>
