@@ -4,7 +4,7 @@ $conn = false;
 
 function getConfigData()
 {
-	$path = 'db/config.json';
+	$path = realpath(dirname(dirname(__FILE__))) . str_replace('/', DIRECTORY_SEPARATOR, '/db/config.json');
 	return json_decode(file_get_contents($path));
 }
 
