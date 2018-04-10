@@ -3,6 +3,7 @@
 	padding: 0;
 	overflow: hidden;
 	background-color: #000;
+	transition: background-color 0.2s;
 }
 
 .test2 svg {
@@ -18,6 +19,10 @@
 
 .test2 .game-over {
 	display: none;
+}
+
+.test2.game-over {
+	background-color: #503c66;
 }
 
 .test2.game-over svg {

@@ -9,14 +9,14 @@
 @import url('welcome.css');
 
 html {
-	background-color: #6f1dea;
+	background-color: #70558e;
 	height: 100%;
 }
 
 body {
 	font-family: arial;
 	color: #fff;
-	background-color: #6f1dea;
+	background-color: #70558e;
     box-sizing: border-box;
 	min-height: 100%;
 	height: 100%;
