@@ -29,6 +29,12 @@ create table `users` (
         REFERENCES genders(id)
 );
 
+create table rating_results (
+  id int primary key auto_increment,
+  name varchar(30) not null,
+  description varchar(255) not null
+);
+
 create table user_ratings (
   id int primary key auto_increment,
   user_id int not null,
@@ -61,6 +67,14 @@ insert into genders(id, name) values
 (1, 'Female'),
 (2, 'Male'),
 (3, 'Other')
+;
+
+insert into rating_results(id, name, description) values
+(1, 'Extremely Impaired', 'Very poor cognitive impairment, Very low score results. Should not attend work and should not operate machinery.'),
+(2, 'Impaired', 'Poor cognitive impairment, Decreased score results. Can attend work but not operate machinery.'),
+(3, 'Slightly Impaired', 'Some cognitive impairment, Decreased score results. Can attend work and operate machinery.'),
+(4, 'Not Impaired', 'No strong sign of cognitive impairment, Normal score results. Can attend work and operate machinery.'),
+(5, 'Optimal', 'Better than normal cognitive function, Better than normal score results. Can attend work and operate machinery.')
 ;
 
 insert into users(id, email, password_hash, gender_id, usage_reason_id) values

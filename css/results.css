@@ -16,13 +16,32 @@
 }
 
 .results .rating-name {
-	background-color: #fa0;
 	color: #fff;
 	font-size: 5vmin;
 	padding: 3vmin 5vmin;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
+}
+
+.results .rating-1 .rating-name {
+	background-color: #f00;
+}
+
+.results .rating-2 .rating-name {
+	background-color: #f60;
+}
+
+.results .rating-3 .rating-name {
+	background-color: #fa0;
+}
+
+.results .rating-4 .rating-name {
+	background-color: #870;
+}
+
+.results .rating-5 .rating-name {
+	background-color: #0a0;
 }
 
 .results .rating-number {
