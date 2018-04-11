@@ -86,6 +86,11 @@ form .form-inputs {
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
+#validation-message {
+	font-weight: bold;
+	color: #a00;
+}
+
 html > body .form-inputs .invalid input, 
 html > body .form-inputs .invalid select {
 	border: 1px solid #800 !important;

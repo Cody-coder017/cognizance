@@ -1,9 +1,28 @@
 $(document).ready(function() {
-	
+
 	function navigateToTest2Directions() {
 		window.location.href = 'test2_directions.php';
 	}
-	
+
+	function sendSignupRequest() {
+		var data = {
+			'username': $('#username').val().trim(),
+			'password': $('#password').val().trim()
+		};
+		return $.ajax({
+			'method': 'POST',
+			'url': 'api/signup.php',
+			'data': data,
+			'success': function(response) {
+				
+			},
+			'error': function( jqXHR, textStatus, errorThrown) {
+				processAJAXError(jqXHR, textStatus, errorThrown);
+				console.error('signup request failed.', jqXHR, ', textStatus = ' + textStatus + ', errorThrown = ' + errorThrown);
+			}
+		});
+	}
+
 	function validateAll() {
 		var msg = validate();
 		if (msg)
@@ -21,13 +40,15 @@ $(document).ready(function() {
 			}
 		}
 	}
-	
+
 	function navButtonClicked() {
 		if (!validateAll()) {
-			navigateToTest2Directions();
+			sendSignupRequest().then(function() {
+				navigateToTest2Directions();
+			});
 		}
 	}
-	
+
 	var $nav_button = $('.main-navigation-button');
 	$nav_button.attr('type', 'button');
 	$nav_button.click(navButtonClicked);

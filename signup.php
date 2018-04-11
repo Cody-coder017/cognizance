@@ -6,6 +6,8 @@ printHeader('signup', ['js/utils.js', 'js/signup.js']);
 	<p>Please give credentials so you can sign in any time</p>
 	<form method="post">
 		<div class="form-inputs">
+		   <div id="validation-message">
+		   </div>
 		   <div>
 				<label for="username">Username</label>
 				<input name="username" id="username" type="text">
