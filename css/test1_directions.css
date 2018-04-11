@@ -1,0 +1,6 @@
+
+@media screen and (min-height: 500px) and (min-width: 350px) {
+	body.test-directions.test-1 .content p {
+		margin-bottom: 20vh;
+	}
+}

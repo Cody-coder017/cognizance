@@ -1,0 +1,14 @@
+.test-directions.test-4 ol {
+	padding-left: 20px;
+}
+.test-directions.test-4 ol li {
+	margin-bottom: 20px;
+	margin-bottom: 5vh;
+}
+
+@media screen and (max-width: 310px) {
+	.test-directions.test-4 h1 {
+		font-size: 24px; /* fallback if vw not supported */
+		font-size: 9vw;
+	}
+}

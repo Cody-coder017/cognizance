@@ -1,0 +1,19 @@
+.test-directions.test-3 ol {
+	padding-left: 20px;
+}
+
+.test-directions.test-3 ol li {
+	margin-bottom: 5vh;
+}
+
+@media screen and (max-width: 400px) and (max-height: 500px) {
+	body.test-directions.test-3 .content ol li {
+		margin-bottom: 3vh;
+	}
+}
+
+@media screen and (min-width: 401px) and (min-height: 700px) {
+	body.test-directions.test-3 .content ol li {
+		margin-bottom: 8vh;
+	}
+}
