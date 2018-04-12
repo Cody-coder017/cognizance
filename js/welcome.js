@@ -6,10 +6,28 @@ $(document).ready(function() {
 		window.location.href = "signup.php";
 	}
 
+	function save() {
+		var data = {
+			'gender_id': $('input[name="gender_id"]:checked').val(),
+			'date-of-birth': $('#date-of-birth').val(),
+			'reason-for-usage': $('#reason-for-usage').val(),
+			'frequency': $('#frequency').val()
+		};
+		return $.ajax({
+			'method': 'POST',
+			'url': 'api/welcome.php',
+			'data': data,
+			'error': function( jqXHR, textStatus, errorThrown) {
+				processAJAXError(jqXHR, textStatus, errorThrown);
+				console.error('signup request failed.', jqXHR, ', textStatus = ' + textStatus + ', errorThrown = ' + errorThrown);
+			}
+		});
+	}
+
 	function navigationButtonClicked() {
 		var msg = validate();
 		if (msg === 0) {
-			navigateToSignUp();
+			save().then(navigateToSignUp);
 		}
 	}
 

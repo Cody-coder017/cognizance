@@ -6,6 +6,8 @@ printHeader('welcome', ['js/utils.js', 'js/welcome.js']);
 	<p>Please answer the following questions before taking tests</p>
 	<form method="post">
 		<div class="form-inputs">
+		   <div id="validation-message">
+		   </div>
 		   <div class="genders">
 				<label>Gender</label>
 				<div class="equally-spaced">
