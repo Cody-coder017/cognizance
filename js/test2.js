@@ -1,27 +1,42 @@
 $(document).ready(function() {
-	
+
+	function ViewportResize(width, height) {
+		var self = this;
+
+		self.getEventType = function() {
+			return 'viewport/resize';
+		};
+
+		self.getEventData = function() {
+			return {
+				'width': width,
+				'height': height
+			};
+		};
+	}
+
 	function Square(colour, size, x, y) {
 		var self = this;
 
 		Shape.apply(self, [colour, size, x, y]);
-		
+
 		self.draw = function() {
 			var newShape = draw.rect(size, size);
 			newShape.move(x, y);
 			newShape.animate().fill(colour);
 			return newShape;
 		};
-		
+
 		self.getEventType = function() {
 			return 'shape/square';
 		};
 	}
-	
+
 	function Circle(colour, size, x, y) {
 		var self = this;
 
 		Shape.apply(self, [colour, size, x, y]);
-		
+
 		self.draw = function() {
 			var newShape = draw.circle(size, size);
 			newShape.move(x, y);
@@ -50,7 +65,7 @@ $(document).ready(function() {
 			};
 		};
 	}
-	
+
 	function createRandomShape() {
 		var size = getAveragePixelDimension() * 0.05 * (1 + Math.random());
 		var x = Math.random() * (getMaxX() - size);
@@ -63,7 +78,7 @@ $(document).ready(function() {
 			return new Square(colour, size, x, y);
 		}
 	}
-	
+
 	var timer;
 	var draw = SVG('svg-display').size('100%', '100%');
 	var circleDiameter = getAveragePixelDimension() * 0.1;
@@ -75,21 +90,21 @@ $(document).ready(function() {
 	var maxRandomShapes = 5;
 	var ballVelocityVariation = getAveragePixelDimension() * 0.002;
 	var gamePlayEvents = [];
-	
+
 	function randomizeVelocity() {
 		v[0] += (Math.random() - 0.5) * ballVelocityVariation;
 		v[1] += (Math.random() - 0.5) * ballVelocityVariation;
 	}
-	
+
 	function getAveragePixelDimension() {
 		return (getMaxX() + getMaxY()) / 2;
 	}
-	
+
 	function getMaxX() {
 		var result = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 		return result;
 	}
-	
+
 	function getMaxY() {
 		var result = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 		return result;
@@ -117,7 +132,7 @@ $(document).ready(function() {
 			circle.y(d[1]);
 		}
 	}
-	
+
 	function getRandomColour() {
 		var result = '';
 		var digits = '89abcdef';
@@ -139,6 +154,12 @@ $(document).ready(function() {
 		randomShapeCount++;
 	}
 
+	function viewportResized() {
+		var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+		var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+		gamePlayEvents.push(new ViewportResize(w, h).getEventData());
+	};
+
 	function moveBox() {
 		processInterval();
 		d[0] += v[0];
@@ -155,7 +176,7 @@ $(document).ready(function() {
 		$('.content').remove();
 		$('body').addClass('game-over');
 	}
-	
+
 	function submitResults() {
 		var data = {
 			'events': gamePlayEvents,
@@ -165,13 +186,13 @@ $(document).ready(function() {
 		var deferred = $.Deferred().resolve();
 		return deferred.promise();
 	}
-	
+
 	function seeResults() {
 		submitResults().then(function() {
 			location.href = 'results.php';
 		});
 	}
-	
+
 	function updateNavigateDisabled() {
 		var val = $('input[type="number"]').val();
 		if (!isNaN(val) && val && parseInt(val) > 0) {
@@ -186,4 +207,6 @@ $(document).ready(function() {
 	$('.main-navigation-button').attr('type', 'button').click(seeResults);
 	timer = window.setInterval(moveBox, 20);
 	setTimeout(endGame, 20 * 1000);
+	viewportResized();
+	$(window).resize(viewportResized);
 });
