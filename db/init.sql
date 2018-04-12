@@ -26,7 +26,8 @@ create table `users` (
   FOREIGN KEY (usage_reason_id)
         REFERENCES usage_reasons(id),
   FOREIGN KEY (gender_id)
-        REFERENCES genders(id)
+        REFERENCES genders(id),
+  CONSTRAINT UC_email UNIQUE (email)
 );
 
 create table rating_results (
