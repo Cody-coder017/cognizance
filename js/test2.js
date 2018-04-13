@@ -178,13 +178,22 @@ $(document).ready(function() {
 	}
 
 	function submitResults() {
-		var data = {
+		var game_play_data = {
 			'events': gamePlayEvents,
 			'guessed_number': $('input').val()
 		};
-		// FIXME: change this to run $.ajax and POST eventsData to server.
-		var deferred = $.Deferred().resolve();
-		return deferred.promise();
+		var data = {
+			'test_id': 2,
+			'game_play_data': JSON.stringify(game_play_data)
+		};
+		return $.ajax({
+			'url': 'api/save_test_results.php',
+			'method': 'POST',
+			'data': data,
+			'error': function() {
+				processAJAXError();
+			}
+		});
 	}
 
 	function seeResults() {
@@ -206,7 +215,7 @@ $(document).ready(function() {
 	$('input').bind('change keypress', updateNavigateDisabled);
 	$('.main-navigation-button').attr('type', 'button').click(seeResults);
 	timer = window.setInterval(moveBox, 20);
-	setTimeout(endGame, 20 * 1000);
+	window.setTimeout(endGame, 20 * 1000);
 	viewportResized();
 	$(window).resize(viewportResized);
 });

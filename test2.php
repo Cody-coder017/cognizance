@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
 	die();
 }
 
-printHeader('test2 test', ['js/svg.js', 'js/test2.js'], false);
+printHeader('test2 test', ['js/utils.js', 'js/svg.js', 'js/test2.js'], false);
 ?>
 <div class="content" id="svg-display">
 </div>
@@ -14,6 +14,7 @@ printHeader('test2 test', ['js/svg.js', 'js/test2.js'], false);
 	<form>
 		<h1>Game Over!</h1>
 		<div class="form-inputs">
+			<div id="validation-message"></div>
 			<p>How many shapes did you see?</p>
 			<input id="number-of-shapes" type="number" min="0" step="1">
 		</div>
