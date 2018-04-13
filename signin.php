@@ -5,6 +5,11 @@ printHeader('signin', ['js/utils.js', 'js/signin.js']);
 	<p>Please sign in to view past results and try again</p>
 	<form method="post">
 		<div class="form-inputs">
+			<div id="validation-message"><?php
+			if (isset($_GET['redirect_message'])) {
+				echo htmlspecialchars($_GET['redirect_message']);
+			}
+			?></div>
 		   <div>
 				<label for="username">Username</label>
 				<input name="username" id="username" type="text">
