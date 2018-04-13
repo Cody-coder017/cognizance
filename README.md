@@ -34,7 +34,7 @@ Talk to Josh to deploy publicly.  The credentials are protected for security rea
 
 Here are some details on the public hosting environment used at http://polla.bhstudents.net/cognizance/.  They've been taken out of phpinfo results and could be useful.
 
-PHP version 5.6
-_SERVER['HTTP_HOST'] returns 'polla.bhstudents.net'.
-MySQL client API version: 5.6.32-78.1
-PDO MySQL driver is: mysqlnd 5.0.11-dev - 20120503 - $Id: 76b08b24596e12d4553bd41fc93cccd5bac2fe7a $
+- PHP version 5.6
+- _SERVER['HTTP_HOST'] returns 'polla.bhstudents.net'.
+- MySQL client API version: 5.6.32-78.1
+- PDO MySQL driver is: mysqlnd 5.0.11-dev - 20120503 - $Id: 76b08b24596e12d4553bd41fc93cccd5bac2fe7a
