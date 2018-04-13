@@ -24,10 +24,19 @@ $(document).ready(function() {
 		});
 	}
 
+	function isPrivacyAgreed() {
+		return $('#agree').is(':checked');
+	}
+
 	function navigationButtonClicked() {
 		var msg = validate();
 		if (msg === 0) {
-			save().then(navigateToSignUp);
+			if (!isPrivacyAgreed()) {
+				$('#validation-message').text('Must agree to privacy policy');
+			}
+			else {
+				save().then(navigateToSignUp);
+			}
 		}
 	}
 

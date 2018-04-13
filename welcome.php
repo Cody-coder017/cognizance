@@ -50,7 +50,7 @@ printHeader('welcome', ['js/utils.js', 'js/welcome.js']);
 		   </div>
 		   <div class="agree">
 			   <input id="agree" name="agree" type="checkbox">
-			   <label for="agree">Agree to use, privacy, safety terms</label>
+			   <label for="agree">Agree to use, <a href="https://termsfeed.com/privacy-policy/3a32df416d2dd71c6bc5418998c7922b">privacy, safety terms</a></label>
 		   </div>
 	   </div>
 	   <button class="main-navigation-button start-with-tests" type="submit">

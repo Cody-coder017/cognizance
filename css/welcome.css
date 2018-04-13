@@ -45,6 +45,10 @@ body.welcome {
 	border-radius: 2px;
 }
 
+.welcome a {
+	color: #000;
+}
+
 /* Hide arrows in Chrome.
 Adapted from:
 https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box
