@@ -13,6 +13,11 @@ create table genders (
   name varchar(30) not null
 );
 
+create table tests (
+  id int primary key auto_increment,
+  name varchar(255) not null
+);
+
 create table `users` (
   id int primary key auto_increment,
   email varchar(50) not null,
@@ -32,19 +37,21 @@ create table `users` (
 
 create table rating_results (
   id int primary key auto_increment,
-  name varchar(30) not null,
+  `name` varchar(30) not null,
   description varchar(255) not null
 );
 
 create table user_ratings (
   id int primary key auto_increment,
   user_id int not null,
-  rating_1 decimal(10, 2),
-  rating_2 decimal(10, 2),
-  rating_3 decimal(10, 2),
-  rating_4 decimal(10, 2),
+  test_id int not null,
+  game_play_data text not null,
+  cached_rating decimal(10, 1),
   FOREIGN KEY (user_id)
         REFERENCES users(id)
+        ON DELETE CASCADE,
+  FOREIGN KEY (test_id)
+        REFERENCES tests(id)
         ON DELETE CASCADE
 );
 
@@ -68,6 +75,13 @@ insert into genders(id, name) values
 (1, 'Female'),
 (2, 'Male'),
 (3, 'Other')
+;
+
+insert into tests(id, name) values
+(1, 'Decision Making and Reaction Time'),
+(2, 'Hand and Eye Coordination'),
+(3, 'Balance Test'),
+(4, 'Exhaled Breath Test')
 ;
 
 insert into rating_results(id, name, description) values
