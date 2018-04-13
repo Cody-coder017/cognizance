@@ -21,7 +21,7 @@ printHeader('index');
 		</div>
 
 		<div>
-			<a href="downloads/app-release.apk">
+			<a href="install.php">
 				<h2>Download Android</h2>
 				<span>Install Android App</span>
 			</a>
