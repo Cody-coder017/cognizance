@@ -1,6 +1,11 @@
 <?php
 require_once('includes/header_footers.php');
 
+if (!isset($_SESSION['user_id'])) {
+	header("Location: signin.php?redirect_message=Sign+up+or+sign+in+required+for+testing");
+	die();
+}
+
 printHeader('test2 test', ['js/svg.js', 'js/test2.js'], false);
 ?>
 <div class="content" id="svg-display">
