@@ -1,7 +1,7 @@
 <?php
 require_once('includes/header_footers.php');
 
-printHeader('test-directions');
+printHeader('test-directions test-2');
 ?>
 <div class="content">
 	<h1>Hand and Eye Coordination</h1>

@@ -1,0 +1,6 @@
+
+@media screen and (max-width: 420px) {
+	.test-directions.test-2 h1 {
+		font-size: 6.5vw;
+	}
+}
