@@ -80,3 +80,21 @@
 		border-radius: 6vmin;
 	}
 }
+
+@media screen and (min-width: 300px) and (max-width: 410px) and (min-height: 430px) and (max-height: 700px) {
+	.results .content {
+		display: flex;
+		height: 92vh;
+		flex-direction: column;
+	}
+
+	.results .content .rating-name {
+		display: block;
+		width: 100%;
+		box-sizing: border-box;
+	}
+	
+	.results .content .rating-number {
+		flex-grow: 1;
+	}
+}

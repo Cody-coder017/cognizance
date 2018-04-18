@@ -248,6 +248,9 @@ $(document).ready(function() {
 
 	function preventBehavior(e) {
 		e.preventDefault(); 
+		e.stopPropagation();
+		e.returnValue = false;
+		return false;
 	};
 
 	// Prevent dragging your finger from swapping pages.
