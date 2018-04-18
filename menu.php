@@ -9,7 +9,7 @@ printHeader('menu', []);
 			<li>My Personal Profile</li>
 			<li><a href="test1_directions.php">Instructions</a></li>
 			<li>Tests</li>
-			<li><a href="results.php">My Results</a></li>
+			<li><a href="results_list.php">My Results</a></li>
 		</ul>
 	</div>
 <?php

@@ -9,6 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 printHeader('test2 test', ['js/utils.js', 'js/svg.js', 'js/test2.js'], false);
 ?>
 <div class="content" id="svg-display">
+	<div class="touch-point-marker hidden"></div>
 </div>
 <div class="game-over">
 	<form>

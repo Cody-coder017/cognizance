@@ -1,9 +1,11 @@
 <?php
 require_once('includes/header_footers.php');
 require_once('includes/db_utils.php');
+require_once('includes/RatingCalculator.php');
+
 
 // FIXME: get the rating level from a calculation off collected test results.
-$ratingLevel = 3.0;
+$ratingLevel = RatingCalculator::getRatingFor($_GET['user_rating_id']);
 $ratingLevelInt = round($ratingLevel);
 $ratingData = DBUtils::get('rating_results', $ratingLevelInt);
 

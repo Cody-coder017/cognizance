@@ -12,6 +12,28 @@
 	box-sizing: border-box;
 }
 
+.test2 .touch-point-marker {
+	background-image: url('../images/touch-point-marker.svg');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	width: 40vmin;
+	height: 40vmin;
+	margin-top: -20vmin;
+	margin-left: -20vmin;
+	position: absolute;
+	opacity: 1;
+    animation: spin 5s linear infinite;
+	transition: opacity 0.2s;
+}
+
+.test2 .touch-point-marker.hidden {
+	opacity: 0;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
 .test2 svg rect, .test2 svg circle {
 	stroke-width: 2px;
 	stroke: #f00;

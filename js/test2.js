@@ -3,14 +3,23 @@ $(document).ready(function() {
 	function ViewportResize(width, height) {
 		var self = this;
 
-		self.getEventType = function() {
-			return 'viewport/resize';
-		};
-
 		self.getEventData = function() {
 			return {
+				'type': 'viewport/resize',
 				'width': width,
 				'height': height
+			};
+		};
+	}
+
+	function TouchPointMoved(x, y) {
+		var self = this;
+		
+		self.getEventData = function() {
+			return {
+				'type': 'input/touchmove',
+				'x': x,
+				'y': y
 			};
 		};
 	}
@@ -88,7 +97,7 @@ $(document).ready(function() {
 	var randomShapeQueue = [];
 	var randomShapeCount = 0;
 	var maxRandomShapes = 5;
-	var ballVelocityVariation = getAveragePixelDimension() * 0.002;
+	var ballVelocityVariation = getAveragePixelDimension() * 0.001;
 	var gamePlayEvents = [];
 
 	function randomizeVelocity() {
@@ -164,8 +173,13 @@ $(document).ready(function() {
 		processInterval();
 		d[0] += v[0];
 		d[1] += v[1];
+		gamePlayEvents.push({
+			'type': 'position/move',
+			'x': d[0],
+			'y': d[1]
+		});
 		randomizeVelocity();
-		if (Math.random() < 0.05) {
+		if (Math.random() < 0.01) {
 			addRandomShape();
 		}
 	}
@@ -190,15 +204,21 @@ $(document).ready(function() {
 			'url': 'api/save_test_results.php',
 			'method': 'POST',
 			'data': data,
-			'error': function() {
-				processAJAXError();
+			'error': function(jqXHR, textStatus, errorThrown) {
+				processAJAXError(jqXHR, textStatus, errorThrown);
 			}
 		});
 	}
 
 	function seeResults() {
-		submitResults().then(function() {
-			location.href = 'results.php';
+		submitResults().then(function(response) {
+			if (typeof response === 'string') {
+				response = JSON.parse(response);
+			}
+			if (!response || !response.user_rating_id) {
+				throw new Error('response = ' + response);
+			}
+			location.href = 'results.php?user_rating_id=' + response.user_rating_id;
 		});
 	}
 
@@ -211,11 +231,33 @@ $(document).ready(function() {
 			$('.main-navigation-button').attr('disabled', true);
 		}
 	}
+	
+	function touchPointMoved(event) {
+		var x = event.clientX, y = event.clientY;
+		if( x === undefined || y === undefined ) {
+			x = event.originalEvent.touches[0].pageX;
+			y = event.originalEvent.touches[0].pageY;
+		}
+		var evt = new TouchPointMoved(x, y);
+		gamePlayEvents.push(evt.getEventData());
+		$('.touch-point-marker').removeClass('hidden').css({
+			'top': y + 'px',
+			'left': x + 'px'
+		});
+	}
 
-	$('input').bind('change keypress', updateNavigateDisabled);
+	function preventBehavior(e) {
+		e.preventDefault(); 
+	};
+
+	// Prevent dragging your finger from swapping pages.
+	document.addEventListener("touchmove", preventBehavior, false);
+
+	$('input').on('change keypress keyup', updateNavigateDisabled);
+	$('body').on('touchmove touchstart touchend mousemove mousedown mouseup', touchPointMoved);
 	$('.main-navigation-button').attr('type', 'button').click(seeResults);
 	timer = window.setInterval(moveBox, 20);
-	window.setTimeout(endGame, 20 * 1000);
+	window.setTimeout(endGame, 10 * 1000);
 	viewportResized();
 	$(window).resize(viewportResized);
 });
