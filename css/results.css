@@ -24,30 +24,45 @@
 	text-align: center;
 }
 
-.results .rating-1 .rating-name {
+.results .rating-1 .rating-name, .results .circle.rating-1 {
 	background-color: #f00;
 }
 
-.results .rating-2 .rating-name {
+.results .rating-2 .rating-name, .results .circle.rating-2 {
 	background-color: #f60;
 }
 
-.results .rating-3 .rating-name {
+.results .rating-3 .rating-name, .results .circle.rating-3 {
 	background-color: #fa0;
 }
 
-.results .rating-4 .rating-name {
+.results .rating-4 .rating-name, .results .circle.rating-4 {
 	background-color: #870;
 }
 
-.results .rating-5 .rating-name {
+.results .rating-5 .rating-name, .results .circle.rating-5 {
 	background-color: #0a0;
 }
 
+.results .circle-row {
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 10px;
+}
+
+.results .circle {
+	width: 20px;
+	height: 20px;
+	border-radius: 20px;
+}
+
 .results .rating-number {
+	padding-bottom: 0.83em;
+	margin-bottom: 0;
 	font-size: 9vmin;
 	color: #559;
 	text-align: center;
+	box-shadow: 0 -40px 20px -20px #eef inset;
 }
 
 .results .rating-description {
@@ -56,4 +71,12 @@
 	font-size: 18px;
 	padding-left: 10px;
 	padding-right: 10px;
+}
+
+@media screen and (max-width: 400px) {
+	.results .circle {
+		width: 6vmin;
+		height: 6vmin;
+		border-radius: 6vmin;
+	}
 }

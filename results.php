@@ -16,6 +16,12 @@ printHeader('results', []);
 		
 		<div class="rating-name"><?php echo $ratingData['name']; ?></div>
 		
+		<div class="circle-row">
+			<?php for ($i = 1; $i <= 5; $i ++): ?>
+				<div class="circle rating-<?php echo $i; ?>"></div>
+			<?php endfor; ?>
+		</div>
+		
 		<h2 class="rating-number"><?php echo sprintf('%.1f', $ratingLevel); ?></h2>
 		
 		<p class="rating-description">
