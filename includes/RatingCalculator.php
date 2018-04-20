@@ -36,8 +36,15 @@ class RatingCalculator
 		$y = 0;
 		$numTimes = 0;
 		$totalDistanceRatio = 0;
+		$events = [];
+		if ( is_array($data) ) {
+			$events = $data['events'];
+		}
+		else {
+			$events = $data->events;
+		}
 
-		foreach ($data->events as $event) {
+		foreach ($events as $event) {
 			if ( $event->type === 'viewport/resize' ) {
 				$avgSize = ($event->width + $event->height) * 0.5;
 			}
@@ -45,7 +52,7 @@ class RatingCalculator
 				$x = $event->x;
 				$y = $event->y;
 			}
-			if ( $event->type === 'position/move' ) { 
+			if ( $event->type === 'position/move' && $avgSize > 0 ) { 
 				$touchX = $event->x;
 				$touchY = $event->y;
 
