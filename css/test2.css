@@ -7,7 +7,6 @@
 }
 
 .test2 svg {
-	width: 100%;
 	height: 100vh;
 	box-sizing: border-box;
 }
@@ -75,4 +74,33 @@
 
 .test2 .main-navigation-button[disabled] {
 	background-color: #ddd;
+}
+
+
+/** 
+ * iPad with portrait orientation.
+ */
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait){
+  svg {
+    height: 1024px;
+  }
+}
+
+/** 
+ * iPad with landscape orientation.
+ */
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:landscape){
+  svg {
+    height: 768px;
+  }
+}
+
+/**
+ * iPhone 5
+ * You can also target devices with aspect ratio.
+ */
+@media screen and (device-aspect-ratio: 40/71) {
+  svg {
+    height: 500px;
+  }
 }

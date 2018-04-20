@@ -1,4 +1,8 @@
 $(document).ready(function() {
+	var position_indicator_showing = false;
+	var $touchMarker = $('.touch-point-marker');
+	var was_full_screen = isFullScreen();
+	var timer;
 
 	function ViewportResize(width, height) {
 		var self = this;
@@ -166,6 +170,10 @@ $(document).ready(function() {
 	function viewportResized() {
 		var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 		var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+		$svg = $('svg');
+		$svg.css({
+			'width': w + 'px'
+		});
 		gamePlayEvents.push(new ViewportResize(w, h).getEventData());
 	};
 
@@ -189,6 +197,12 @@ $(document).ready(function() {
 		window.clearInterval(timer);
 		$('.content').remove();
 		$('body').addClass('game-over');
+		$('input').on('change keypress keyup', updateNavigateDisabled);
+		$('.main-navigation-button').attr('type', 'button').click(seeResults);
+		$('body').off('touchmove touchstart touchend mousemove mousedown mouseup', touchPointMoved);
+		if ( !was_full_screen ) {
+			exitFullScreen();
+		}
 	}
 
 	function submitResults() {
@@ -232,18 +246,39 @@ $(document).ready(function() {
 		}
 	}
 	
+	function stopImmediatePropagation(event) {
+		if ( typeof event.stopImmediatePropagation === 'function' ) {
+			event.stopImmediatePropagation();
+		}
+	}
+	
 	function touchPointMoved(event) {
 		var x = event.clientX, y = event.clientY;
 		if( x === undefined || y === undefined ) {
+			if ( event.originalEvent.touches.length === 0 ) {
+				stopImmediatePropagation(event);
+				return; // Do nothing.
+			}
 			x = event.originalEvent.touches[0].pageX;
 			y = event.originalEvent.touches[0].pageY;
 		}
 		var evt = new TouchPointMoved(x, y);
 		gamePlayEvents.push(evt.getEventData());
-		$('.touch-point-marker').removeClass('hidden').css({
-			'top': y + 'px',
-			'left': x + 'px'
+		if ( !position_indicator_showing ) {
+			$touchMarker.removeClass('hidden');
+			position_indicator_showing = true;
+		}
+		$touchMarker.css({
+			'top': Math.round(y) + 'px',
+			'left': Math.round(x) + 'px'
 		});
+		stopImmediatePropagation(event);
+	}
+	
+	function disableScroll() {
+		window.addEventListener('DOMMouseScroll', preventBehavior, false);
+		window.onwheel = preventBehavior; // modern standard
+		window.onmousewheel = document.onmousewheel = preventBehavior; // older browsers, IE
 	}
 
 	function preventBehavior(e) {
@@ -252,15 +287,16 @@ $(document).ready(function() {
 		e.returnValue = false;
 		return false;
 	};
+	
+	function startGame() {
+		disableScroll();
+		goFullScreen();
+		$('body').on('touchmove touchstart touchend mousemove mousedown mouseup', touchPointMoved);
+		timer = window.setInterval(moveBox, 20);
+		window.setTimeout(endGame, 10 * 1000);
+		viewportResized();
+		$(window).resize(viewportResized);
+	}
 
-	// Prevent dragging your finger from swapping pages.
-	document.addEventListener("touchmove", preventBehavior, false);
-
-	$('input').on('change keypress keyup', updateNavigateDisabled);
-	$('body').on('touchmove touchstart touchend mousemove mousedown mouseup', touchPointMoved);
-	$('.main-navigation-button').attr('type', 'button').click(seeResults);
-	timer = window.setInterval(moveBox, 20);
-	window.setTimeout(endGame, 10 * 1000);
-	viewportResized();
-	$(window).resize(viewportResized);
+	startGame();
 });

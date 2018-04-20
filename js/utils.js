@@ -40,3 +40,38 @@ function validate() {
 	});
 	return num_invalid;
 }
+
+function exitFullScreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    }
+}
+
+function goFullScreen() {
+	if (typeof document.documentElement.requestFullscreen === 'function') {
+		document.documentElement.requestFullscreen();
+	}
+	else if (typeof document.requestFullscreen === 'function') {
+		document.requestFullscreen();
+	}
+	else if (typeof document.webkitRequestFullscreen === 'function') {
+		document.webkitRequestFullscreen();
+	}
+	else if (typeof document.mozRequestFullScreen === 'function') {
+		document.mozRequestFullScreen();
+	}
+	else if (typeof document.msRequestFullscreen === 'function') {
+		document.msRequestFullscreen();
+	}
+}
+
+function isFullScreen() {
+	return (window.fullScreen) ||
+		(window.innerWidth == screen.width && window.innerHeight == screen.height)	
+}
