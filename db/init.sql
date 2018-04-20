@@ -43,6 +43,7 @@ create table rating_results (
 
 create table user_ratings (
   id int primary key auto_increment,
+  create_datetime datetime not null,
   user_id int not null,
   test_id int not null,
   game_play_data text not null,

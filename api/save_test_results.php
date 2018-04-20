@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		exit();
 	}
 	$conn = getDBConnection();
-	$stmt = $conn->prepare("INSERT INTO user_ratings (user_id, test_id, game_play_data) VALUES (:user_id, :test_id, :game_play_data)");
+	$stmt = $conn->prepare("INSERT INTO user_ratings (create_datetime, user_id, test_id, game_play_data) VALUES (now(), :user_id, :test_id, :game_play_data)");
 	$userId = $_SESSION['user_id'];
 	$userId = intval($userId);
 	$testId = sanitizeTestId($_POST['test_id']);
