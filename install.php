@@ -20,6 +20,8 @@ printHeader('install', []);
 		<ol>
 			<li><a href="https://gs4.gadgethacks.com/forum/enable-unknown-sources-android-install-apps-outside-play-store-0150603/">Enable installing from unknown sources</a>.</li>
 			<li>Download <a href="downloads/app-release.apk">the apk file</a>.</li>
+			<li>If it can't install from your browser's download feature, 
+			open the apk from your File Manager app.</li>
 		</ol>
 	</div>
 <?php
